@@ -1,0 +1,56 @@
+[
+  {
+    "category": "Smilts",
+    "name": "Smilts",
+    "fraction": "",
+    "unit": "m3",
+    "price": 8.0,
+    "status": "available",
+    "updated_at": "2025-10-27T12:04"
+  },
+  {
+    "category": "Melnzeme",
+    "name": "Melnzeme",
+    "fraction": "",
+    "unit": "m3",
+    "price": 11.0,
+    "status": "available",
+    "updated_at": "2025-10-27T12:04"
+  },
+  {
+    "category": "Šķembas",
+    "name": "Šķembas 0/45",
+    "fraction": "0/45",
+    "unit": "t",
+    "price": 7.5,
+    "status": "oos",
+    "updated_at": "2025-10-27T12:04"
+  },
+  {
+    "category": "Šķembas",
+    "name": "Šķembas 0/56",
+    "fraction": "0/56",
+    "unit": "t",
+    "price": 7.5,
+    "status": "available",
+    "updated_at": "2025-10-27T12:04"
+  },
+  {
+    "category": "Šķembas",
+    "name": "Šķembas 0/32",
+    "fraction": "0/32",
+    "unit": "t",
+    "price": 7.5,
+    "status": "low",
+    "updated_at": "2025-10-27T12:04"
+  },
+  {
+    "category": "Šķembas",
+    "name": "Šķembas 0/16",
+    "fraction": "0/16",
+    "unit": "t",
+    "price": 8.8,
+    "status": "available",
+    "updated_at": "2025-10-27T12:04"
+  }
+]

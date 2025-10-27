@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Karjers Saulstari</title>
+  <meta name="description" content="Karjers “Saulstari” — smilts, melnzeme, šķembas. Piegāde. Salaspils novads.">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="Karjers Saulstari" width="32" height="32">
+      <strong>Karjers Saulstari</strong>
+    </div>
+    <nav>
+      <a href="index.html" class="">Sākums</a>
+      <a href="materials.html" class="active">Materiāli</a>
+      <a href="contact.html" class="">Kontakti</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <h1 style="margin-top:10px;margin-bottom:6px">Materiāli</h1>
+    <p class="meta">Cenas norādītas pie karjera. Lieliem apjomiem piedāvājam individuālas cenas — <a href="contact.html">pieteikties šeit</a>.</p>
+
+    <div class="controls">
+      <label>
+        <span>Kategorija</span><br>
+        <select id="filterCategory">
+          <option value="">Visas</option>
+          <option>Smilts</option>
+          <option>Melnzeme</option>
+          <option>Šķembas</option>
+        </select>
+      </label>
+      <label>
+        <span>Statuss</span><br>
+        <select id="filterStatus">
+          <option value="">Visi</option>
+          <option value="available">Pieejams</option>
+          <option value="low">Neliels daudzums</option>
+          <option value="oos">Šobrīd nav pieejams</option>
+          <option value="by_order">Pēc pasūtījuma</option>
+        </select>
+      </label>
+      <input type="search" id="searchBox" placeholder="Meklēt (piem., 0/16, melnzeme, ...)" />
+    </div>
+
+    <div id="materialsGrid" class="grid"></div>
+  </div>
+</section>
+
+<script>
+let ITEMS = [];
+const mapLabel = {"available":"Pieejams","low":"Neliels daudzums","oos":"Šobrīd nav pieejams","by_order":"Pēc pasūtījuma"};
+const cls = {"available":"available","low":"low","oos":"oos","by_order":"by_order"};
+const dot = {"available":"green","low":"yellow","oos":"red","by_order":"yellow"};
+
+function materialCard(m){
+  const price = m.price ? `${m.price.toFixed(2)} €${m.unit?`/${m.unit}`:""}` : `Cena pēc pieprasījuma`;
+  const fraction = m.fraction ? `<div class='meta'>${m.fraction}</div>` : "";
+  const hash = encodeURIComponent(m.name);
+  const extra = m.status==="oos" ? ` — <a href="contact.html?material=${encodeURIComponent(m.name)}">interesēties</a>` : "";
+  return `<div class="card" id="${hash}">
+    <div class="row"><h3>${m.name}</h3><span class="chip ${cls[m.status]}">${mapLabel[m.status]}</span></div>
+    ${fraction}
+    <div class="avail-line"><span class="dot ${dot[m.status]}"></span><strong>Pieejamība:</strong> ${mapLabel[m.status]}${extra}</div>
+    <div class="row" style="margin-top:8px">
+      <div class="price">${price}</div>
+      <a class="btn" href="contact.html?material=${encodeURIComponent(m.name)}">Uzdot jautājumu</a>
+    </div>
+    <div class="meta">Atjaunots: ${new Date(m.updated_at).toLocaleString('lv-LV')}</div>
+  </div>`;
+}
+
+async function load(){
+  const res = await fetch('data/materials.json');
+  ITEMS = await res.json();
+  render();
+  if (location.hash.length>1){
+    const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+}
+
+function render(){
+  const cat = document.getElementById('filterCategory').value;
+  const st = document.getElementById('filterStatus').value;
+  const q = document.getElementById('searchBox').value.toLowerCase().trim();
+  let out = ITEMS.filter(m =>
+    (!cat || m.category===cat) &&
+    (!st || m.status===st) &&
+    (!q || (m.name.toLowerCase().includes(q) || (m.fraction||'').toLowerCase().includes(q)))
+  );
+  document.getElementById('materialsGrid').innerHTML = out.map(materialCard).join('');
+}
+
+document.addEventListener('input', (e)=>{
+  if (['filterCategory','filterStatus','searchBox'].includes(e.target.id)) render();
+});
+load();
+</script>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div>© 2025 Karjers “Saulstari”. Visas tiesības aizsargātas.</div>
+      <div>Darba dienās 7:00–18:00 · Tel. <a href="tel:+37120044910">+371 20044910</a></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
