@@ -13,7 +13,7 @@ body{font-family:system-ui,Arial,sans-serif;margin:0;background:var(--bg);color:
 .header{background:var(--panel);position:sticky;top:0;z-index:20;box-shadow:var(--shadow)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
 .brand{display:flex;align-items:center;gap:10px}
-.brand img{height:calc(.95 * var(--nav-h));width:auto;object-fit:contain;border-radius:8px}
+.brand img{height:calc(.85 * var(--nav-h));width:auto;object-fit:contain;border-radius:8px}
 nav a{margin-left:14px;text-decoration:none;color:var(--muted);font-weight:600;padding:8px 12px;border-radius:12px}
 nav a.active{color:#fff;background:linear-gradient(90deg,var(--active), var(--primary));box-shadow:0 2px 8px rgba(31,59,45,.25)}
 nav a:hover{color:var(--primary)}
@@ -86,7 +86,6 @@ textarea{min-height:110px;resize:vertical}
   padding: 10px 14px;        /* mazāks “pill” spilventiņš */
   line-height: 1.1;
 }
-
 
 /* === DEBUG: Super visible white 'Saulstari' rays === */
 :root{
