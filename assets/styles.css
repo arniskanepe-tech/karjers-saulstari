@@ -127,8 +127,6 @@ body::after{
   body::after{ opacity: 1.0; }
 }
 
-
-
 /* v45: uniform service grid (always 3 per row on desktop) */
 .work-grid{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 28px; }
 .work-card{ grid-column: auto !important; } /* cancel any previous spanning rules */
@@ -140,3 +138,16 @@ body::after{
   .work-grid{ grid-template-columns: 1fr; }
 }
 
+/* Mobile nav active: underline instead of pill */
+@media (max-width: 768px){
+  body[class^="theme-"] nav a.active,
+  body[class*=" theme-"] nav a.active,
+  nav a.active{
+    background: transparent !important;
+    box-shadow: none !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
